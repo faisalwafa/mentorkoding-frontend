@@ -1,0 +1,19 @@
+.ungu {
+  background-color: #4568DC !important;
+  color: white !important;
+}
+  
+/* .ungu:hover {
+  background-color: #B06AB3 !important;
+  color: white !important;
+} */
+
+.putih{
+    margin-right: 12px;
+    border: solid 1px #4568DC !important;
+}
+
+.putih:hover{
+  color: white !important;
+  background-color: #4568DC;
+}

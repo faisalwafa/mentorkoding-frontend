@@ -1,0 +1,29 @@
+.title,.skill-section{
+    margin-top: 100px;
+}
+
+.font-title{
+    color: white;
+    font-size: 6rem;
+    line-height: 100px; 
+}
+
+.search{
+    width: 90% !important;
+    margin-bottom: 20px !important;
+}
+
+.headline-image{
+    margin-top: 200px;
+}
+
+
+.skill-text{
+    margin-top: 100px;
+}
+
+.skill-title{
+    color:#B06AB3;
+    font-size: 4rem;
+    line-height: 80px; 
+}   
