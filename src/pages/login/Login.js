@@ -14,7 +14,7 @@ export default class Login extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8080/api/v1/users/login", {
+        axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/login", {
             username: this.state.username,
             password: this.state.password
         })

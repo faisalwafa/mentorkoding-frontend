@@ -24,7 +24,7 @@ export default class Profile extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/api/v1/users/profile", {
+        axios.get("https://mentor-koding-backend.herokuapp.com/api/v1/users/profile", {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("authToken")}`
             }
