@@ -12,7 +12,7 @@ export default class Homepage extends Component {
                     <div className="row">
                         <div className="col-md-6">
                             <div className="title">
-                                <h1 className="font-title">Welcome to your coding partner</h1>
+                                <h1 className="font-title">Learn To Code Now</h1>
                             </div>
                             <div className="title">
                                 <input className=" search form-control-lg " type="search" placeholder="Find your mentor here" aria-label="Search" /><br />
