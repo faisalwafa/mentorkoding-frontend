@@ -1,0 +1,9 @@
+.info{
+    position: relative !important;
+}
+
+.sunting{
+    position: absolute !important;
+    top: 0;
+    right: 0
+}

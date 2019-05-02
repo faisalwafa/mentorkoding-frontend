@@ -4,6 +4,10 @@ import InformasiProfil from './InformasiProfil';
 import Deskripsi from './Deskripsi';
 import axios from 'axios';
 import Skills from './Skills';
+import Portofolio from './Portofolio';
+import "./Profile.css";
+
+import { apiEndpoint } from "../../helper/helper";
 
 export default class Profile extends Component {
     state = {
@@ -20,11 +24,12 @@ export default class Profile extends Component {
         projects: "",
         reviews: "",
         email: "",
-        profilePic: ""
+        profilePic: "",
+        loading: false
     }
 
     componentDidMount() {
-        axios.get("https://mentor-koding-backend.herokuapp.com/api/v1/users/profile", {
+        axios.get(`${apiEndpoint}/api/v1/users/profile`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("authToken")}`
             }
@@ -44,36 +49,145 @@ export default class Profile extends Component {
                     projects: response.data.projects,
                     reviews: response.data.reviews,
                     email: response.data.email,
-                    profilePic: response.data.profilePic
+                    profilePic: response.data.profilePic,
+                    loading: true
                 })
                 console.log(this.state)
             })
     }
 
+    updateInformation = (contact) => {
+        const { address, phone, job } = contact
+
+        axios
+            .put(`http://localhost:8080/api/v1/users/profile`, {
+                address, phone, job
+            }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    }
+                })
+            .then(response => {
+                const { data } = response
+                this.setState({
+                    address: data.address,
+                    phone: data.phone,
+                    educations: data.educations,
+                    job: data.job
+                })
+            })
+            .catch(err => console.log(err))
+    }
+
+    updateSkill = (skills) => {
+        console.log(skills)
+        axios
+            .put(`http://localhost:8080/api/v1/users/profile`, {
+                skills
+            }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    }
+                })
+            .then(response => {
+                const { data } = response
+                this.setState({
+                    skills: [data.skills]
+                })
+            })
+            .catch(err => console.log(err))
+    }
 
     render() {
         return (
             <div>
                 <Header />
                 <div className="container">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12">
+                    <div className="row">
+                        <div className="col-lg-6 col-md-12">
                             <Deskripsi
                                 name={this.state.name}
                                 description={this.state.description}
                             />
                         </div>
-                        <div class="col-lg-6 col-md-12">
-                            <InformasiProfil
-                                address={this.state.address}
-                                phone={this.state.phone}
-                                educations={this.state.educations}
-                                job={this.state.job}
-                            />
+                        <div className="col-lg-6 col-md-12">
+                            {
+                                this.state.loading ? <InformasiProfil
+                                    address={this.state.address}
+                                    phone={this.state.phone}
+                                    educations={this.state.educations}
+                                    job={this.state.job}
+                                    updateInformation={this.updateInformation}
+                                /> : <div class="card my-5">
+                                        <div class="card-body">
+                                            <div className="d-flex justify-content-center align-items-center">
+                                                <div class="spinner-grow text-primary" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                                <div class="spinner-grow text-secondary" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                                <div class="spinner-grow text-success" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                                <div class="spinner-grow text-danger" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                                <div class="spinner-grow text-warning" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                                <div class="spinner-grow text-info" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                                <div class="spinner-grow text-light" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                                <div class="spinner-grow text-dark" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            }
                         </div>
                     </div>
                     <div>
-                        <Skills />
+                        {
+                            this.state.loading ? <Skills skills={this.state.skills} updateSkill={this.updateSkill} />
+                                : <div class="card my-5">
+                                    <div class="card-body">
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <div class="spinner-grow text-primary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-secondary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-success" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-danger" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-warning" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-info" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-light" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-dark" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+                    </div>
+                    <div>
+                        <Portofolio />
                     </div>
                 </div>
             </div >

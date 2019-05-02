@@ -65,7 +65,7 @@ export default class Login extends Component {
                                     className="form-control"
                                     placeholder="Password" />
                             </div>
-                            <button type="submit" className="btn btn-primary btn-block" >Submit</button>
+                            <button type="submit" className="btn btn-gradient btn-block" >Submit</button>
                         </form>
                         <p className="text-center mt-5 login-bottom">Belum punya akun? <a href="#">Daftar disini</a></p>
                         {this.state.isRedirected && (

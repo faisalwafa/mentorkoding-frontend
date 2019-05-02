@@ -29,7 +29,7 @@ export default class HeaderBefore extends Component {
                                     <a className="btn putih my-2 my-sm-0" href="#">Join Now</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="btn ungu my-2 my-sm-0" href="#">Sign Up</a>
+                                    <a className="btn ungu my-2 my-sm-0" href="./login">Sign In</a>
                                 </li>
                             </ul>
                         </div>
