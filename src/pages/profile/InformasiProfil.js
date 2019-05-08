@@ -17,12 +17,16 @@ export default class InformasiProfil extends Component {
 
     render() {
         return (
-            <div>
-                <div className="card my-5 info">
-                    <h5 className="text-center my-2">Informasi Profil</h5>
-                    <button className="btn btn-primary sunting" data-toggle="modal" data-target="#SuntingProfil">
-                        Sunting
-                    </button>
+            <div className="card my-5 info">
+                <div className="card-body">
+                    <div className="mb-4">
+                        <h5 className="text-center">Informasi Profil</h5>
+                        <button className="btn btn-outline-primary sunting" data-toggle="modal" data-target="#SuntingProfil">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+
+
                     <div className="modal fade" id="SuntingProfil" tabIndex="-1" role="dialog" >
                         <div className="modal-dialog" role="document">
                             <div className="modal-content">
@@ -79,7 +83,7 @@ export default class InformasiProfil extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="card-body row">
+                    <div className=" row">
                         <div className="col-5 ">
                             <p className="card-text"><i className="fas fa-map-marker-alt"></i> Alamat</p>
                             <p className="card-text"><i className="fas fa-mobile-alt"></i> Telepon</p>
@@ -94,6 +98,7 @@ export default class InformasiProfil extends Component {
                         </div>
                     </div>
                 </div>
+
             </div>
         )
     }

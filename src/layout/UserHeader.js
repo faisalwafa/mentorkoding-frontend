@@ -30,17 +30,17 @@ export default class HeaderAfter extends Component {
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item active">
-                                    <a className="nav-link" href="#">Home </a>
+                                    <a className="nav-link" href="/">Home </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Message</a>
+                                    <a className="nav-link" href="/home">Schedule</a>
                                 </li>
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         My Profile</a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" href="#">Profile</a>
-                                        <a className="dropdown-item" href="#">Logout</a>
+                                        <a className="dropdown-item" href="/Profile">Profile</a>
+                                        <a className="dropdown-item" href="/Logout">Logout</a>
                                     </div>
                                 </li>
                             </ul>
