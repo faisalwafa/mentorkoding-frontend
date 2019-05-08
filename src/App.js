@@ -6,6 +6,8 @@ import Login from "./pages/login/Login";
 import Logout from "./pages/login/Logout";
 import Register from "./pages/register/Register";
 import EditProfil from "./pages/profile/EditProfil";
+import Search from "./pages/search/Search";
+import Meetup from "./pages/meetup/Meetup";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import { PrivateRoute } from './layout/PrivateRoute';
@@ -18,6 +20,9 @@ class App extends Component {
         <PrivateRoute path="/Home" exact component={Home} />
         <PrivateRoute path="/Profile" component={Profile} />
         <PrivateRoute path="/EditProfile" component={EditProfil} />
+        <PrivateRoute path="/Search" component={Search}/>
+        <PrivateRoute path="/Meetup" component={Meetup}/>
+        <Route path="/Profile/:id" component={Profile} />
         <Route path="/Login" component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Logout" component={Logout} />
