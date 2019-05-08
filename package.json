@@ -12,11 +12,8 @@
     "react-multivalue-text-input": "^0.5.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-<<<<<<< HEAD
-    "styled-components": "^4.2.0"
-=======
+    "styled-components": "^4.2.0",
     "uuid": "^3.3.2"
->>>>>>> a495cc82adae0b508df6ec7dc138771dbc4543eb
   },
   "scripts": {
     "start": "react-scripts start",
