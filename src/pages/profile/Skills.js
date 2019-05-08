@@ -18,6 +18,15 @@ export default class Skills extends Component {
         this.props.updateSkill(this.state.skills)
     }
 
+    onDelete = async (id) => {
+        let newSkill = [...this.state.skills]
+        newSkill.splice(id, 1)
+        await this.setState({
+            skills: [...newSkill]
+        })
+        this.props.deleteSkill(this.state.skills)
+    }
+
     render() {
         return (
             <div>
@@ -25,32 +34,13 @@ export default class Skills extends Component {
                     <h5 className=" mt-4">Keahlian yang Dimiliki</h5>
                     <div className="card-body ">
                         <div className="row">
-                            <div className="col-12">
-                                {
-                                    this.state.skills.map((skill, index) => {
-                                        return <SkillItem key={index} skill={skill} id={index}/>
-                                    })
-                                }
-                            </div>
-                            {/* <div className="col-12">
-                                <div className="card my-1">
-                                    <div className="mt-3 ml-4">
-                                        <p>React</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-12">
-                                <div className="card my-1">
-                                    <div className="mt-3 ml-4">
-                                        <p>Node.js</p>
-                                    </div>
-                                </div>
-                            </div> */}
-                            <button className="btn btn-primary" data-toggle="modal" data-target="#AddSkills" style={{
-                                margin: "auto"
-                            }}>
-                                Tambah
-                            </button>
+                            {/* <div className="col-12"> */}
+                            {
+                                this.state.skills.map((skill, index) => {
+                                    return <SkillItem key={index} id={index} skill={skill} id={index} onDelete={this.onDelete} />
+                                })
+                            }
+                            {/* </div> */}
                             <div className="modal fade" id="AddSkills" tabIndex="-1" role="dialog" >
                                 <div className="modal-dialog" role="document">
                                     <div className="modal-content">
@@ -81,6 +71,11 @@ export default class Skills extends Component {
                                 </div>
                             </div>
                         </div>
+                        <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddSkills" style={{
+                            margin: "auto"
+                        }}>
+                            Tambah
+                            </button>
                     </div>
                 </div>
             </div>

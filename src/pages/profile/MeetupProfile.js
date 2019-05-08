@@ -9,7 +9,7 @@ import "./Profile.css";
 
 import { apiEndpoint } from "../../helper/helper";
 
-export default class Profile extends Component {
+export default class MeetupProfile extends Component {
     state = {
         name: "",
         description: "",
@@ -56,80 +56,19 @@ export default class Profile extends Component {
             })
     }
 
-    updateInformation = (contact) => {
-        const { address, phone, job } = contact
-
-        axios
-            .put(`${apiEndpoint}/api/v1/users/profile`, {
-                address, phone, job
-            }, {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
-                    }
-                })
-            .then(response => {
-                const { data } = response
-                this.setState({
-                    address: data.address,
-                    phone: data.phone,
-                    educations: data.educations,
-                    job: data.job
-                })
-            })
-            .catch(err => console.log(err))
-    }
-
-    updateSkill = (skills) => {
-        // let newSkill = [...this.state.skills, skill]
-        axios
-            .put(`${apiEndpoint}/api/v1/users/profile`, {
-                skills
-            }, {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
-                    }
-                })
-            .then(response => {
-                const { data } = response
-                this.setState({
-                    skills: [data.skills]
-                })
-            })
-            .catch(err => console.log(err))
-    }
-
-    deleteSkill = (skills) => {
-        // let newSkills = [...this.state.skills]
-        axios
-            .put(`${apiEndpoint}/api/v1/users/profile`, {
-                skills
-            }, {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
-                    }
-                })
-            .then(response => {
-                const { data } = response
-                this.setState({
-                    skills: [data.skills]
-                })
-            })
-            .catch(err => console.log(err))
-    }
-
     render() {
         return (
             <div>
                 <Header />
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 col-md-12">
+                        <div className="col-lg-6 col-md-12">
                             <Deskripsi
                                 name={this.state.name}
                                 description={this.state.description}
                             />
                         </div>
-                        <div className="col-lg-9 col-md-12">
+                        <div className="col-lg-6 col-md-12">
                             {
                                 this.state.loading ? <InformasiProfil
                                     address={this.state.address}
@@ -172,7 +111,7 @@ export default class Profile extends Component {
                     </div>
                     <div>
                         {
-                            this.state.loading ? <Skills skills={this.state.skills} updateSkill={this.updateSkill} deleteSkill={this.deleteSkill} />
+                            this.state.loading ? <Skills skills={this.state.skills} />
                                 : <div class="card my-5">
                                     <div class="card-body">
                                         <div className="d-flex justify-content-center align-items-center">
