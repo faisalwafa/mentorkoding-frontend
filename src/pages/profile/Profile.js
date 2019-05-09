@@ -170,6 +170,9 @@ export default class Profile extends Component {
                             }
                         </div>
                     </div>
+                    <button class="btn btn-primary">
+                        Meetup
+                    </button>
                     <div>
                         {
                             this.state.loading ? <Skills skills={this.state.skills} updateSkill={this.updateSkill} deleteSkill={this.deleteSkill} />

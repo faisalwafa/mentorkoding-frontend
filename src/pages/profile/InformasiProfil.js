@@ -17,7 +17,7 @@ export default class InformasiProfil extends Component {
 
     render() {
         return (
-            <div className="card my-5 info">
+            <div className="card my-3 info">
                 <div className="card-body">
                     <div className="mb-4">
                         <h5 className="text-center">Informasi Profil</h5>
