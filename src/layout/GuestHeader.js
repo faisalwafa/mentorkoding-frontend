@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Logo from '../assets/WebLogo.png'
+import Logo from '../assets/WebLogo2.png'
 import './Header.css'
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ export default class HeaderBefore extends Component {
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container">
-                        <Link className="navbar-brand" to="#"><img src={Logo} width="70" /></Link>
+                        <Link className="navbar-brand" to="#"><img src={Logo} alt="logo" height="30" /></Link>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item active">

@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import Header from '../../layout/Header'
 import './Homepage.css'
 import Image from '../../assets/lesson.png'
-import Mentor from '../../assets/mentor.png'
-import { Link } from "react-router-dom";
+import Mentor from '../../assets/mentor2.png'
+import { Link, Redirect } from "react-router-dom";
 
 export default class Homepage extends Component {
     render() {
         return (
             <div>
+                {localStorage.getItem('authToken') && (
+                    <Redirect to="/Home" />
+                )}
                 <Header />
                 <div className="container">
                     <div className="row">
