@@ -29,21 +29,21 @@ export default class Homepage extends Component {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <img className="headline-image" src={Image} width="100%" />
+                            <img className="headline-image" src={Image} alt="headline image" width="100%" />
                         </div>
                     </div>
                     <div className="card mt-60">
                         <div className="row text-center my-5 mx-4">
                             <div className="col-md-4">
-                                <h1 className="mb-4 text-ungu"><i class="fas fa-tools"></i></h1>
+                                <h1 className="mb-4 text-ungu"><i className="fas fa-tools"></i></h1>
                                 <h5>Input the skill you want to learn</h5>
                             </div>
                             <div className="col-md-4">
-                                <h1 className="mb-4 text-ungu"><i class="fas fa-users"></i></h1>
+                                <h1 className="mb-4 text-ungu"><i className="fas fa-users"></i></h1>
                                 <h5>Find your mentor and organize the meetup</h5>
                             </div>
                             <div className="col-md-4">
-                                <h1 className="mb-4 text-ungu"><i class="fas fa-book-open"></i></h1>
+                                <h1 className="mb-4 text-ungu"><i className="fas fa-book-open"></i></h1>
                                 <h5>Learn and master the skill with your mentor</h5>
                             </div>
                         </div>
@@ -51,7 +51,7 @@ export default class Homepage extends Component {
                     <div className="mb-5">
                         <div className="row">
                             <div className="col">
-                                <img className="headline-image" src={Mentor} width="90%" />
+                                <img className="headline-image" src={Mentor} alt="image mentor" width="90%" />
                             </div>
                             <div className="col-md-6">
                                 <div className="title">
@@ -70,21 +70,12 @@ export default class Homepage extends Component {
                             <Link className="btn btn-outline-light my-2 my-sm-0 ml-4 btn-lg btn-humongous" to="/Login">Sign In</Link>
                         </div>
                     </div>
-                    {/* <div className="card my-5">
-                        <div className="card-body text-center">
-                            <h1 className="bold mt-3">Register Now</h1>
-                            <div className="mt-4">
-                                <Link className="btn btn-light my-2 my-sm-0 btn-lg mr-4 btn-huge" to="/Register">Sign Up</Link>
-                                <Link className="btn btn-outline-light my-2 my-sm-0 btn-lg btn-huge" to="/Login">Sign In</Link>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
                 <div className="card text-center" style={{
                     backgroundColor:"#4568DC"
                 }}>
                     <div className="card-body">
-                        <h6 className="text-white">Copyright 2018</h6>
+                        <h6 className="text-white">Copyright&copy;2018</h6>
                     </div>
                 </div>
             </div>

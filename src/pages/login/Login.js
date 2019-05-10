@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 // import HeaderHome from "../../layout/HeaderHome";
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import './Login.css'
-import Logo from '../../assets/WebLogo.png'
 
 export default class Login extends Component {
     state = {
@@ -34,43 +33,40 @@ export default class Login extends Component {
             <div>
                 {/* <HeaderHome /> */}
                 <div className="container">
-                    <div className=" my-5 " style={{
-                        width: "40%",
-                        margin: "auto"
-                    }}>
-                        <div className="text-center mb-5" >
-                            <img src={Logo} width="120px" />
-                        </div>
-                        <div className="login-title">
-                            <h2 className="text-center">Selamat Datang!</h2>
-                            <p className="text-center mb-5">Ayo cari mentor yang cocok buat kamu </p>
-                        </div>
-                        <form onSubmit={this.onSubmit}>
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="username"
-                                    value={this.state.username}
-                                    onChange={this.onChange}
-                                    className="form-control"
-                                    placeholder="Username"
-                                />
+                    <div className=" my-5 card w-50 mx-auto">
+                        <div className="card-body">
+                            <div className="login-title">
+                                <h1 className="text-center">Welcome Back</h1>
+                                <hr/>
+                                <h3 className="text-center mb-5">Meet your Mentor or Student now</h3>
                             </div>
-                            <div className="form-group">
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={this.state.password}
-                                    onChange={this.onChange}
-                                    className="form-control"
-                                    placeholder="Password" />
-                            </div>
-                            <button type="submit" className="btn btn-gradient btn-block" >Submit</button>
-                        </form>
-                        <p className="text-center mt-5 login-bottom">Belum punya akun? <a href="#">Daftar disini</a></p>
-                        {this.state.isRedirected && (
-                            <Redirect to="/Profile" />
-                        )}
+                            <form onSubmit={this.onSubmit}>
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        name="username"
+                                        value={this.state.username}
+                                        onChange={this.onChange}
+                                        className="form-control form-control-lg"
+                                        placeholder="Username"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        value={this.state.password}
+                                        onChange={this.onChange}
+                                        className="form-control form-control-lg"
+                                        placeholder="Password" />
+                                </div>
+                                <button type="submit" className="btn mt-4 btn-gradient btn-block btn-lg" >Submit</button>
+                            </form>
+                            <p className="text-center mt-3 login-bottom">Belum punya akun? <Link to="/Register">Daftar disini</Link></p>
+                            {this.state.isRedirected && (
+                                <Redirect to="/Profile" />
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

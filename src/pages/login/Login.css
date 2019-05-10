@@ -1,7 +1,8 @@
-.login-title,.login-bottom{
+/* .login-title,.login-bottom{
     color: white;
-}
+} */
 
 .btn-gradient{
-    background-color: #4568DC !important;
+    background-image: linear-gradient(to right, #4568DC, #B06AB3) !important;
+    color: white !important;
 }
