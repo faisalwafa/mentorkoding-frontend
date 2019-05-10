@@ -1,29 +1,56 @@
-.title,.skill-section{
+.title{
     margin-top: 100px;
+}
+
+.mt-60 {
+    margin-top: 60px;
 }
 
 .font-title{
     color: white;
-    font-size: 6rem;
-    line-height: 100px; 
+    font-size: 5rem;
+    font-weight: bold;
+    /* line-height: 100px;  */
+}
+
+.font-subtitle{
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
 }
 
 .search{
     width: 90% !important;
     margin-bottom: 20px !important;
+    height: 50px !important;
 }
 
 .headline-image{
-    margin-top: 200px;
+    margin-top: 120px;
 }
 
-
-.skill-text{
-    margin-top: 100px;
+.divider {
+    height: 2px;
+    background-color: rgb(247, 212, 248);
+    width: 80%;
 }
 
-.skill-title{
-    color:#B06AB3;
-    font-size: 4rem;
-    line-height: 80px; 
-}   
+.divider-full {
+    width: 90%;
+}
+
+.text-ungu {
+    color: #4568DC
+}
+
+.btn-huge {
+    padding: .6rem 2rem !important;
+}
+
+.btn-humongous {
+    padding: .9rem 3rem !important;
+}
+
+.bold {
+    font-weight: bold
+}
