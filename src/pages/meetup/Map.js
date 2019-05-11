@@ -3,6 +3,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
 import styled from "styled-components";
+import marker from '../../assets/map-marker.png'
 
 const Wrapper = styled.div`
     width : ${props => props.width};
@@ -33,21 +34,21 @@ export default class Map extends Component {
         
         L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png').addTo(this.map); 
 
-        this.circle = L.circle([this.state.lat, this.state.lng],{
-            fillOpacity: 0,
-            radius: 0
-        }).addTo(this.map)
+        this.newMarker = L.icon({
+            iconUrl: marker,
+
+            iconSize:     [40, 40], // size of the icon
+            iconAnchor:   [22, 22], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        
+        this.marker = L.marker([this.props.lat, this.props.lng], {icon: this.newMarker}).addTo(this.map)
     }
 
     updateMap=()=>{
-        this.map.removeLayer(this.circle)
+        this.map.removeLayer(this.marker)
         this.map.panTo([this.props.lat, this.props.lng])
-        this.circle = L.circle([this.props.lat, this.props.lng],{
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.5,
-            radius: 10
-        }).addTo(this.map);
+        this.marker = L.marker([this.props.lat, this.props.lng], {icon: this.newMarker}).addTo(this.map)
     }
 
     render(){

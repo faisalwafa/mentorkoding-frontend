@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Map from './Map';
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class Form extends Component {
 
@@ -31,60 +32,60 @@ export default class Form extends Component {
   onChange = (e) => this.setState({[e.target.name]:e.target.value});
 
   render() {
-    const position = [51.505, -0.09]
     return (
       <div>
         <div className='card mt-5' style={{
-          width: '70%',
+          width: '60%',
           margin: 'auto'
         }}>
-          <div className='card-body'>
+          <div className='card-body p-5'>
             <form>
-              <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Nama Mentor</label>
-                <div className="col-sm-10">
-                  <input type="text" name="" id="" className="form-control" placeholder="" value="Dafa Akbar" readOnly/>
+              <div className="form-group row mb-4">
+                <label className="col-sm-3 col-form-label">Nama Mentor :</label>
+                <div className="col-sm-9">
+                  <input type="text" name="" id="" className="form-control form-control-lg" placeholder="" value="Daffa Akbar" readOnly/>
                 </div>
               </div>
-              <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Materi</label>
-                <div className="col-sm-10">
-                  <input type="text" name="" id="" className="form-control" placeholder="Materi yang dibahas...."/>
+              <div className="form-group row mb-4">
+                <label className="col-sm-3 col-form-label">Materi :</label>
+                <div className="col-sm-9">
+                  <input type="text" name="" id="" className="form-control form-control-lg" placeholder="Materi yang dibahas...."/>
                 </div>
               </div>
-              <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Tanggal</label>
-                <div className="col-sm-10">
-                  <input type="date" name="" id="" className="form-control" placeholder=""/>
+              <div className="form-group row mb-4">
+                <label className="col-sm-3 col-form-label">Tanggal :</label>
+                <div className="col-sm-9">
+                  <input type="date" name="" id="" className="form-control form-control-lg" placeholder=""/>
                 </div>
               </div>
-              <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Tempat</label>
-                <div className="col-sm-7">
+              <div className="form-group row mb-4">
+                <label className="col-sm-3 col-form-label">Tempat :</label>
+                <div className="col">
                   <input 
                   type="text" 
                   name="tempat" 
                   id="tempat"
-                  className="form-control" 
+                  className="form-control form-control-lg" 
                   placeholder="Tempat meetup...."
                   onChange={this.onChange}
                   value={this.state.tempat}
                   />                  
                 </div>
                 <div className="col-sm-3">
-                  <button type="button" className="btn btn-primary" onClick={this.onChangeGeo}>Cari Lokasi</button>
+                  <button type="button" className="btn btn-primary h-100" onClick={this.onChangeGeo}>Cari Lokasi</button>
                 </div>
               </div>
               <div className='d-flex justify-content-center'>
                 <Map lat={this.state.lat} lng={this.state.lng} ref="child" />
               </div>
               <hr></hr>
-              <div className="row mt-5">
-                <div className="col-sm-1"></div>
-                <button type="button" className="btn btn-success col-sm-3">Konfirmasi</button>
-                <div className="col-sm-4"></div>
-                <button type="button" className="btn btn-danger col-sm-3">Cancel</button>
-                <div className="col-sm-1"></div>
+              <div>
+                <div className="text-center">
+                  <button type="button" className="btn btn-success btn-lg">Konfirmasi</button>
+                </div>
+                <div className="text-right">
+                  <Link className="btn btn-secondary btn" to="/Home">Cancel</Link>
+                </div>
               </div>
             </form>
           </div>

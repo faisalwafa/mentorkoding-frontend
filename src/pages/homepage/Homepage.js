@@ -41,7 +41,7 @@ export default class Homepage extends Component {
                                 <h1 className="mb-4 text-ungu"><i className="fas fa-tools"></i></h1>
                                 <h5>Input the skill you want to learn</h5>
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-4 border-right border-left border-info">
                                 <h1 className="mb-4 text-ungu"><i className="fas fa-users"></i></h1>
                                 <h5>Find your mentor and organize the meetup</h5>
                             </div>

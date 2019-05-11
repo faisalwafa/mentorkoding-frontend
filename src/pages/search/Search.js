@@ -29,26 +29,30 @@ export default class Search extends Component {
         <div>
             <Header />
             <div className='container'>
-                <div className="row d-flex justify-content-center mt-3">
-                    <MultipleValueTextInput
-                        onItemAdded={(item, allItems) => {
-                            this.setState({
-                                skills: allItems
-                            })
-                        }}
-                        onItemDeleted={(item, allItems) => {
-                            this.setState({
-                                skills: allItems
-                            })
-                        }}
-                        name = "item-input"
-                        placeholder = "Skill yang anda cari ? (pisahkan dengan koma atau enter)"
-                    />
-                    <button type="button" class="ml-3 btn btn-outline-light btn-sm"style={{
-                        height:'40px'
-                    }}
-                    onClick={this.onSubmit}
-                    >Cari</button>
+                <div className="row justify-content-md-center">
+                    <div className="col-6">
+                        <div className="card text-center mt-5 px-5">
+                            <div className="card-body">
+                                <MultipleValueTextInput
+                                    onItemAdded={(item, allItems) => {
+                                        this.setState({
+                                            skills: allItems
+                                        })
+                                    }}
+                                    onItemDeleted={(item, allItems) => {
+                                        this.setState({
+                                            skills: allItems
+                                        })
+                                    }}
+                                    name = "item-input"
+                                    placeholder = "Input Skills (Seperate with comma or enter)"
+                                />
+                                <button type="button" className="btn btn-gradient btn-lg btn-block mt-4"
+                                onClick={this.onSubmit}
+                                >Find Mentor</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {
                     profiles.map((profile, index) => {
@@ -57,7 +61,8 @@ export default class Search extends Component {
                             id={profile._id}
                             nama={profile.name}
                             skills={profile.skills}
-                            instansi={profile.job}
+                            job={profile.job}
+                            address={profile.address}
                         />
                     })
                 }

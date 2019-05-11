@@ -18,14 +18,14 @@ class App extends Component {
       <Router>
         <Route path="/" exact component={Homepage} />
         <PrivateRoute path="/Home" exact component={Home} />
-        <PrivateRoute path="/Profile" component={Profile} />
-        <PrivateRoute path="/EditProfile" component={EditProfil} />
-        <PrivateRoute path="/Search" component={Search}/>
-        <PrivateRoute path="/Meetup" component={Meetup}/>
-        <Route path="/Profile/:id" component={Profile} />
-        <Route path="/Login" component={Login} />
-        <Route path="/Register" component={Register} />
-        <Route path="/Logout" component={Logout} />
+        <PrivateRoute path="/Profile" exact component={Profile} />
+        <PrivateRoute path="/EditProfile" exact component={EditProfil} />
+        <PrivateRoute path="/Search" exact component={Search}/>
+        <PrivateRoute path="/Meetup" exact component={Meetup}/>
+        <Route path="/Profile/:id" exact component={Profile} />
+        <Route path="/Login" exact component={Login} />
+        <Route path="/Register" exact component={Register} />
+        <Route path="/Logout" exact component={Logout} />
       </Router>
     );
   }

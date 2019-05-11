@@ -10,7 +10,7 @@ export default class HeaderAfter extends Component {
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <div className="container">
-                        <Link className="navbar-brand" to="#"><img src={Logo} alt="logo" height="30"/></Link>
+                        <Link className="navbar-brand" to="/Home"><img src={Logo} alt="logo" height="30"/></Link>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav ml-auto">
                                 <li className="nav-item active">
