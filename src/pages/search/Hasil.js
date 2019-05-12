@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
 
 export default class Hasil extends Component {
   render() {
@@ -18,7 +19,7 @@ export default class Hasil extends Component {
                 </div>
                 <div className='col-8'>
                     <div className='my-auto'>
-                        <p className='card-text'><i class='fas fa-tools'></i>
+                        <p className='card-text'><i className='fas fa-tools'></i>
                           <b className="pl-2"> Skills:</b>  
                           <span className="pl-4">
                             {this.props.skills.map((skill, index) => {
@@ -29,17 +30,19 @@ export default class Hasil extends Component {
                             })}
                           </span>
                         </p>
-                        <p className='card-text'><i class='fas fa-building'></i>
+                        <p className='card-text'><i className='fas fa-building'></i>
                           <b className="pl-2">Job:</b>  
                           <span className="pl-5">{this.props.job}</span>
                         </p>
-                        <p className='card-text'><i class='fas fa-map-marker-alt'></i>
+                        <p className='card-text'><i className='fas fa-map-marker-alt'></i>
                           <b className="pl-1"> Address:</b>  
                           <span className="pl-3">{this.props.address}</span>
                         </p>
                     </div>
                     <div className='text-right'>
-                        <button type='button' class='btn btn-outline-success mt-4'>Lihat Profil</button>
+                        <Link to={{
+                          pathname: `/Profile/${this.props.id}`
+                        }} className='btn btn-outline-success mt-4'>Lihat Profil</Link>
                     </div>
                 </div>
             </div>

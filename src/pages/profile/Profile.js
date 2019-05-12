@@ -27,18 +27,18 @@ export default class Profile extends Component {
         reviews: "",
         email: "",
         profilePic: "",
-        myprofile: null,
+        user: null,
         loading: false
     }
 
+    checkUser = () => {
+        return this.state._id === this.state.user._id
+    }
+
     componentDidMount() {
-        axios.get(`${apiEndpoint}/api/v1/users/profile`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem("authToken")}`
-            }
-        })
-            .then(response => {
-                this.setState({
+        axios.get(`${apiEndpoint}/api/v1/users/${this.props.match.params.id}`)
+            .then(async response => {
+                await this.setState({
                     name: response.data.name,
                     description: response.data.description,
                     address: response.data.address,
@@ -53,6 +53,16 @@ export default class Profile extends Component {
                     reviews: response.data.reviews,
                     email: response.data.email,
                     profilePic: response.data.profilePic,
+                })
+                return axios.get(`${apiEndpoint}/api/v1/users/profile`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    }
+                })
+            })
+            .then(async response => {
+                await this.setState({
+                    user: response.data,
                     loading: true
                 })
             })
@@ -215,10 +225,12 @@ export default class Profile extends Component {
                                 <div className="row justify-content-center">
                                     <div className="col-md-3">
                                         <Deskripsi
+                                            user={this.checkUser()}
                                         />
                                     </div>
                                     <div className="col-md-6">
                                         <InformasiProfil
+                                            user={this.checkUser()}
                                             address={this.state.address}
                                             phone={this.state.phone}
                                             job={this.state.job}
@@ -232,14 +244,14 @@ export default class Profile extends Component {
                             </div>
                         </div>
                         <div>
-                             <Skills skills={this.state.skills} updateSkill={this.updateSkill} deleteSkill={this.deleteSkill} />
+                             <Skills user={this.checkUser()} skills={this.state.skills} updateSkill={this.updateSkill} deleteSkill={this.deleteSkill} />
                                     
                         </div>
                         <div>
-                            <Portofolio projects={this.state.projects} updateProject={this.updateProject} deleteProject={this.deleteProject} />  
+                            <Portofolio user={this.checkUser()} projects={this.state.projects} updateProject={this.updateProject} deleteProject={this.deleteProject} />  
                         </div>
                         <div>
-                            <Education educations={this.state.educations} updateEducation={this.updateEducation} deleteEducation={this.deleteEducation} />     
+                            <Education user={this.checkUser()} educations={this.state.educations} updateEducation={this.updateEducation} deleteEducation={this.deleteEducation} />     
                         </div>
                     </div>
                     ) : <Loading />

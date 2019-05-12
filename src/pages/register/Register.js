@@ -6,6 +6,7 @@ export default class Login extends Component {
     state = {
         username: "",
         password: "",
+        description: "",
         name: "",
         email: "",
         address: "",
@@ -22,6 +23,7 @@ export default class Login extends Component {
             email: this.state.email,
             address: this.state.address,
             phone: this.state.phone,
+            description: this.state.description
         })
             .then(response => {
                 localStorage.setItem("authToken", response.data.token)
@@ -68,6 +70,7 @@ export default class Login extends Component {
                                         className="form-control form-control-lg"
                                         placeholder="Password" />
                                 </div>
+                                <hr/>
                                 <div className="form-group">
                                     <input
                                         type="text"
@@ -77,6 +80,16 @@ export default class Login extends Component {
                                         className="form-control form-control-lg"
                                         placeholder="Nama" />
                                 </div>
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        name="description"
+                                        value={this.state.description}
+                                        onChange={this.onChange}
+                                        className="form-control form-control-lg"
+                                        placeholder="Description" />
+                                </div>
+                                <hr/>
                                 <div className="form-group">
                                     <input
                                         type="email"

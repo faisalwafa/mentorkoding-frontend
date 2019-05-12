@@ -49,9 +49,13 @@ export default class Education extends Component {
                             }
                         </div>
                         <div className="text-center">
-                            <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddEducation">
-                                Tambah
-                            </button>
+                            {
+                                this.props.user ? 
+                                <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddEducation">
+                                    Tambah
+                                </button>
+                                : ''
+                            }
                         </div>
                     </div>
                     <div className="modal fade" id="AddEducation" tabIndex="-1" role="dialog" >

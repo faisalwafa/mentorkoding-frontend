@@ -23,9 +23,11 @@ export default class InformasiProfil extends Component {
                 <div className="card-body">
                     <div className="mb-4">
                         <h5 className="text-center">Profile Information</h5>
-                        <button className="btn btn-light sunting" data-toggle="modal" data-target="#SuntingProfil">
+                        {
+                            this.props.user ? <button className="btn btn-light sunting" data-toggle="modal" data-target="#SuntingProfil">
                             <i className="fas fa-edit"></i>
-                        </button>
+                            </button> : ''
+                        }
                     </div>
                     <div className="modal fade" id="SuntingProfil" tabIndex="-1" role="dialog" >
                         <div className="modal-dialog" role="document">

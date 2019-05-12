@@ -71,11 +71,15 @@ export default class Skills extends Component {
                                 </div>
                             </div>
                         </div>
-                        <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddSkills" style={{
-                            margin: "auto"
-                        }}>
-                            Tambah
-                            </button>
+                        {
+                            this.props.user ? 
+                            <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddSkills" style={{
+                                margin: "auto"
+                            }}>
+                                Tambah
+                                </button>
+                            : ''
+                        }
                     </div>
                 </div>
             </div>
