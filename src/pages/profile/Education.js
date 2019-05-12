@@ -1,62 +1,62 @@
 import React, { Component } from 'react'
-import PortofolioItem from './PortofolioItem'
+import EducationItem from './EducationItem'
 
-export default class Portofolio extends Component {
+export default class Education extends Component {
     state = {
         ...this.props,
         name: "",
-        description: "",
-        linkProject: ""
+        dateIn: "",
+        dateOut: ""
     }
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
     handleChange = async (e) => {
         e.preventDefault()
-        let project = {
+        let education = {
             name: this.state.name,
-            description: this.state.description,
-            linkProject: this.state.linkProject
+            dateIn: this.state.dateIn,
+            dateOut: this.state.dateOut
         }
         await this.setState({
-            projects: [...this.state.projects, project],
+            educations: [...this.state.educations, education],
             name: "",
-            description: "",
-            linkProject: ""
+            dateIn: "",
+            dateOut: ""
         })
-        this.props.updateProject(this.state.projects)
+        this.props.updateEducation(this.state.educations)
     }
 
     onDelete = async (id) => {
-        let newProject = [...this.state.projects]
-        newProject.splice(id, 1)
+        let newEducation = [...this.state.educations]
+        newEducation.splice(id, 1)
         await this.setState({
-            projects: [...newProject]
+            educations: [...newEducation]
         })
-        this.props.deleteProject(this.state.projects)
+        this.props.deleteEducation(this.state.educations)
     }
     render() {
         return (
             <div>
                 <div className="card my-4 text-center">
-                    <h5 className=" mt-4">Portofolio</h5>
+                    <h5 className=" mt-4">Education</h5>
                     <div className="card-body">
                         {
-                            this.state.projects.map((project, index) => {
-                                return <PortofolioItem key={index} id={index} project={project} id={index} onDelete={this.onDelete} />
+                            this.state.educations.map((education, index) => {
+                                return <EducationItem key={index} id={index} education={education} id={index} onDelete={this.onDelete} />
                             })
                         }
-                        <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddPortofolio" style={{
+                        <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddEducation" style={{
                             margin: "auto"
                         }}>
                             Tambah
                         </button>
                     </div>
-                    <div className="modal fade" id="AddPortofolio" tabIndex="-1" role="dialog" >
+                    <div className="modal fade" id="AddEducation" tabIndex="-1" role="dialog" >
                         <div className="modal-dialog" role="document">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <h5 className="modal-title" id="exampleModalLabel">Tambah Portofolio</h5>
+                                    <h5 className="modal-title" id="exampleModalLabel">Tambah Pendidikan</h5>
                                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -70,27 +70,25 @@ export default class Portofolio extends Component {
                                                 value={this.state.name}
                                                 onChange={this.onChange}
                                                 className="form-control"
-                                                placeholder="Nama Projek"
+                                                placeholder="Nama Instansi"
                                             />
                                         </div>
                                         <div className="form-group">
                                             <input
-                                                type="text"
-                                                name="description"
-                                                value={this.state.description}
+                                                type="date"
+                                                name="dateIn"
+                                                value={this.state.dateIn}
                                                 onChange={this.onChange}
                                                 className="form-control"
-                                                placeholder="Deskripsi"
                                             />
                                         </div>
                                         <div className="form-group">
                                             <input
-                                                type="text"
-                                                name="linkProject"
-                                                value={this.state.linkProject}
+                                                type="date"
+                                                name="dateOut"
+                                                value={this.state.dateOut}
                                                 onChange={this.onChange}
                                                 className="form-control"
-                                                placeholder="URL"
                                             />
                                         </div>
                                     </div>

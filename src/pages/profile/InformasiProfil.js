@@ -21,7 +21,7 @@ export default class InformasiProfil extends Component {
                 <div className="card-body">
                     <div className="mb-4">
                         <h5 className="text-center">Informasi Profil</h5>
-                        <button className="btn btn-outline-primary sunting" data-toggle="modal" data-target="#SuntingProfil">
+                        <button className="btn btn-light sunting" data-toggle="modal" data-target="#SuntingProfil">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
@@ -87,13 +87,11 @@ export default class InformasiProfil extends Component {
                         <div className="col-5 ">
                             <p className="card-text"><i className="fas fa-map-marker-alt"></i> Alamat</p>
                             <p className="card-text"><i className="fas fa-mobile-alt"></i> Telepon</p>
-                            <p className="card-text"><i className="fas fa-graduation-cap"></i> Pendidikan Terakhir</p>
                             <p className="card-text"><i className="fas fa-building"></i> Pekerjaan</p>
                         </div>
                         <div className="col">
                             <p className="card-text">: {this.props.address}</p>
                             <p className="card-text">: {this.props.phone}</p>
-                            <p className="card-text">: {this.props.educations}</p>
                             <p className="card-text">: {this.props.job}</p>
                         </div>
                     </div>

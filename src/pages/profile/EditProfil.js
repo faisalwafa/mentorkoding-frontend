@@ -16,60 +16,23 @@ export default class EditProfil extends Component {
             <div>
                 <Header />
                 <div className="container">
-                    <div className="card my-4">
-                        <h5 className=" mt-4">Contact</h5>
-                        <form onSubmit={this.props.updateInformation}>
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="address"
-                                    value={this.state.address}
-                                    onChange={this.onChange}
-                                    className="form-control"
-                                    placeholder="Alamat"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <input
-                                    type="number"
-                                    name="phone"
-                                    value={this.state.phone}
-                                    onChange={this.onChange}
-                                    className="form-control"
-                                    placeholder="Telepon" />
-                            </div>
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="educations"
-                                    value={this.state.educations}
-                                    onChange={this.onChange}
-                                    className="form-control"
-                                    placeholder="Pendidikan Terakhir" />
-                            </div>
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="job"
-                                    value={this.state.job}
-                                    onChange={this.onChange}
-                                    className="form-control"
-                                    placeholder="Pekerjaan" />
-                            </div>
-                            {/* <div className="card my-4">
-                                <h5 className=" mt-4">Keahlian yang Dimiliki</h5>
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        name="job"
-                                        value={this.state.job}
-                                        onChange={this.onChange}
-                                        className="form-control"
-                                        placeholder="Pekerjaan" />
+                    <div className="card">
+                        <div className="card-body">
+                            <form >
+                                <div className="form-group row">
+                                    <label className="col-sm-2">Nama</label>
+                                    <input type="text" class="form-control col-sm-10" name="name" id="name" placeholder="" />
                                 </div>
-                            </div> */}
-                            <button type="submit" className="btn btn-primary">Save changes</button>
-                        </form>
+                                <div className="form-group row">
+                                    <label className="col-sm-2">Deskripsi</label>
+                                    <input type="text" class="form-control col-sm-10" name="description" id="description" placeholder="" />
+                                </div>
+                                <div className="form-group row">
+                                    <label className="col-sm-2">Foto</label>
+                                    <input type="file" class="form-control col-sm-10" name="photo" id="photo" />
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

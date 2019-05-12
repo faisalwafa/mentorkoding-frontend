@@ -8,6 +8,7 @@ import Portofolio from './Portofolio';
 import "./Profile.css";
 
 import { apiEndpoint } from "../../helper/helper";
+import Education from './Education';
 
 export default class Profile extends Component {
     state = {
@@ -117,7 +118,86 @@ export default class Profile extends Component {
             .catch(err => console.log(err))
     }
 
+    updateProject = (projects) => {
+        // let newSkill = [...this.state.skills, skill]
+        axios
+            .put(`${apiEndpoint}/api/v1/users/profile`, {
+                projects
+            }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    }
+                })
+            .then(response => {
+                const { data } = response
+                this.setState({
+                    projects: [data.projects]
+                })
+            })
+            .catch(err => console.log(err))
+    }
+
+    deleteProject = (projects) => {
+        // let newSkills = [...this.state.skills]
+        axios
+            .put(`${apiEndpoint}/api/v1/users/profile`, {
+                projects
+            }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    }
+                })
+            .then(response => {
+                const { data } = response
+                this.setState({
+                    projects: [data.projects]
+                })
+            })
+            .catch(err => console.log(err))
+    }
+
+    updateEducation = (educations) => {
+        // let newSkill = [...this.state.skills, skill]
+        axios
+            .put(`${apiEndpoint}/api/v1/users/profile`, {
+                educations
+            }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    }
+                })
+            .then(response => {
+                const { data } = response
+                this.setState({
+                    educations: [data.educations]
+                })
+            })
+            .catch(err => console.log(err))
+    }
+
+    deleteEducation = (educations) => {
+        // let newSkills = [...this.state.skills]
+        axios
+            .put(`${apiEndpoint}/api/v1/users/profile`, {
+                educations
+            }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    }
+                })
+            .then(response => {
+                const { data } = response
+                this.setState({
+                    educations: [data.educations]
+                })
+            })
+            .catch(err => console.log(err))
+    }
+    // checkID = () =>{
+    //     this.state._id == this.props.match.params.id;
+    // }
     render() {
+        console.log(this.state.projects)
         return (
             <div>
                 <Header />
@@ -129,7 +209,7 @@ export default class Profile extends Component {
                                 description={this.state.description}
                             />
                         </div>
-                        <div className="col-lg-9 col-md-12">
+                        <div className="col-lg-6 col-md-12">
                             {
                                 this.state.loading ? <InformasiProfil
                                     address={this.state.address}
@@ -170,9 +250,6 @@ export default class Profile extends Component {
                             }
                         </div>
                     </div>
-                    <button class="btn btn-primary">
-                        Meetup
-                    </button>
                     <div>
                         {
                             this.state.loading ? <Skills skills={this.state.skills} updateSkill={this.updateSkill} deleteSkill={this.deleteSkill} />
@@ -209,7 +286,76 @@ export default class Profile extends Component {
                         }
                     </div>
                     <div>
-                        <Portofolio />
+                        {
+                            this.state.loading ?
+                                <Portofolio projects={this.state.projects} updateProject={this.updateProject} deleteProject={this.deleteProject} />
+                                : <div class="card my-5">
+                                    <div class="card-body">
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <div class="spinner-grow text-primary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-secondary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-success" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-danger" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-warning" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-info" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-light" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-dark" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+                    </div>
+                    <div>
+                        {
+                            this.state.loading ?
+                                <Education educations={this.state.educations} updateEducation={this.updateEducation} deleteEducation={this.deleteEducation} />
+                                : <div class="card my-5">
+                                    <div class="card-body">
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <div class="spinner-grow text-primary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-secondary" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-success" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-danger" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-warning" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-info" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-light" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <div class="spinner-grow text-dark" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        }
                     </div>
                 </div>
             </div >
