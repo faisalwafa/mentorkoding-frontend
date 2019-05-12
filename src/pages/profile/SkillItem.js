@@ -6,22 +6,26 @@ export default class SkillItem extends Component {
         const { id } = this.props
         return (
             <div className="col-6">
-                <div className="card my-1">
-                    <div className="my-3">
-                        <div className="row">
-                            <div className="col-10">
-                                <p>{this.props.skill}</p>
-                            </div>
-                            <div className="col-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li class="dropdown-item text-danger" href="#" style={{
-                                            cursor: "pointer"
-                                        }} onClick={this.props.onDelete.bind(this, id)}><i class="far fa-trash-alt pr-4"></i> Delete</li>
-                                    </ul>
+                <div className="my-3">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="row align-items-center">
+                                <div className="col-10">
+                                    <h6 style={{
+                                        fontSize: "1.1rem"
+                                    }} className="card-text">{this.props.skill}</h6>
+                                </div>
+                                <div className="col-2">
+                                    <div className="dropdown">
+                                        <button className="btn btn-light" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i className="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <ul className="dropdown-menu">
+                                            <li className="dropdown-item text-danger" href="#" style={{
+                                                cursor: "pointer"
+                                            }} onClick={this.props.onDelete.bind(this, id)}><i className="far fa-trash-alt pr-4"></i> Delete</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

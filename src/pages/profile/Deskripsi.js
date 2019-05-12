@@ -14,15 +14,7 @@ export default class Deskripsi extends Component {
     }
     render() {
         return (
-            <div className="card text-center my-3">
-                <div className="card-body">
-                    <img src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" className="rounded-circle" width="100" height="100" />
-                    <h4 className="mt-4">{this.props.name}</h4>
-                    <h5 className="font-weight-light">{this.props.description}</h5>
-                    <button className="btn btn-light sunting" data-toggle="modal" data-target="#SuntingDeskripsi">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                </div>
+            <div className="h-100">
                 <div className="modal fade" id="SuntingDeskripsi" tabIndex="-1" role="dialog" >
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -32,8 +24,8 @@ export default class Deskripsi extends Component {
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form onSubmit={this.handleChange}>
-                                <div className="modal-body">
+                            <div className="modal-body">
+                                <form onSubmit={this.handleChange}>
                                     <div className="form-group">
                                         <input
                                             type="file"
@@ -42,12 +34,22 @@ export default class Deskripsi extends Component {
                                             onChange={this.onChange}
                                             className="form-control" />
                                     </div>
-                                </div>
                                 <div className="modal-footer">
                                     <button type="submit" className="btn btn-primary">Save changes</button>
                                 </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div className="card my-3" style={{
+                    height:"85%"
+                }}>
+                    <div className="card-body d-flex justify-content-center align-items-center">
+                        <img src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" className="rounded-circle" width="120" height="120" />
+                        <button className="btn btn-light sunting" data-toggle="modal" data-target="#SuntingDeskripsi">
+                            <i className="fas fa-edit"></i>
+                        </button>
                     </div>
                 </div>
             </div>

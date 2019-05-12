@@ -6,7 +6,8 @@ import axios from 'axios';
 import Skills from './Skills';
 import Portofolio from './Portofolio';
 import "./Profile.css";
-
+import Loading from "../../layout/Loading";
+import cover from "../../assets/cover.jpg";
 import { apiEndpoint } from "../../helper/helper";
 import Education from './Education';
 
@@ -26,6 +27,7 @@ export default class Profile extends Component {
         reviews: "",
         email: "",
         profilePic: "",
+        myprofile: null,
         loading: false
     }
 
@@ -53,16 +55,15 @@ export default class Profile extends Component {
                     profilePic: response.data.profilePic,
                     loading: true
                 })
-                console.log(this.state)
             })
     }
 
     updateInformation = (contact) => {
-        const { address, phone, job } = contact
+        const { address, phone, job, description } = contact
 
         axios
             .put(`${apiEndpoint}/api/v1/users/profile`, {
-                address, phone, job
+                address, phone, job, description
             }, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem("authToken")}`
@@ -197,168 +198,54 @@ export default class Profile extends Component {
     //     this.state._id == this.props.match.params.id;
     // }
     render() {
-        console.log(this.state.projects)
         return (
             <div>
                 <Header />
                 <div className="container">
-                    <div className="row">
-                        <div className="col-lg-3 col-md-12">
-                            <Deskripsi
-                                name={this.state.name}
-                                description={this.state.description}
-                            />
-                        </div>
-                        <div className="col-lg-6 col-md-12">
-                            {
-                                this.state.loading ? <InformasiProfil
-                                    address={this.state.address}
-                                    phone={this.state.phone}
-                                    educations={this.state.educations}
-                                    job={this.state.job}
-                                    updateInformation={this.updateInformation}
-                                /> : <div class="card my-5">
-                                        <div class="card-body">
-                                            <div className="d-flex justify-content-center align-items-center">
-                                                <div class="spinner-grow text-primary" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                                <div class="spinner-grow text-secondary" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                                <div class="spinner-grow text-success" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                                <div class="spinner-grow text-danger" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                                <div class="spinner-grow text-warning" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                                <div class="spinner-grow text-info" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                                <div class="spinner-grow text-light" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                                <div class="spinner-grow text-dark" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                {
+                    this.state.loading ? (
+                    <div className="container my-5">
+                        <div className="card" style={{
+                            background:`#fff url(${cover}) no-repeat 98% 118%`,
+                            minHeight: "100%",
+                            width:"100%",
+                            overflow:"hidden"
+                        }}>
+                            <div className="card-body">
+                                <div className="row justify-content-center">
+                                    <div className="col-md-3">
+                                        <Deskripsi
+                                        />
                                     </div>
-                            }
+                                    <div className="col-md-6">
+                                        <InformasiProfil
+                                            address={this.state.address}
+                                            phone={this.state.phone}
+                                            job={this.state.job}
+                                            description={this.state.description}
+                                            name={this.state.name}
+                                            username={this.state.username}
+                                            updateInformation={this.updateInformation}
+                                        /> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                             <Skills skills={this.state.skills} updateSkill={this.updateSkill} deleteSkill={this.deleteSkill} />
+                                    
+                        </div>
+                        <div>
+                            <Portofolio projects={this.state.projects} updateProject={this.updateProject} deleteProject={this.deleteProject} />  
+                        </div>
+                        <div>
+                            <Education educations={this.state.educations} updateEducation={this.updateEducation} deleteEducation={this.deleteEducation} />     
                         </div>
                     </div>
-                    <div>
-                        {
-                            this.state.loading ? <Skills skills={this.state.skills} updateSkill={this.updateSkill} deleteSkill={this.deleteSkill} />
-                                : <div class="card my-5">
-                                    <div class="card-body">
-                                        <div className="d-flex justify-content-center align-items-center">
-                                            <div class="spinner-grow text-primary" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-secondary" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-success" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-danger" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-warning" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-info" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-light" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-dark" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        }
-                    </div>
-                    <div>
-                        {
-                            this.state.loading ?
-                                <Portofolio projects={this.state.projects} updateProject={this.updateProject} deleteProject={this.deleteProject} />
-                                : <div class="card my-5">
-                                    <div class="card-body">
-                                        <div className="d-flex justify-content-center align-items-center">
-                                            <div class="spinner-grow text-primary" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-secondary" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-success" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-danger" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-warning" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-info" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-light" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-dark" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        }
-                    </div>
-                    <div>
-                        {
-                            this.state.loading ?
-                                <Education educations={this.state.educations} updateEducation={this.updateEducation} deleteEducation={this.deleteEducation} />
-                                : <div class="card my-5">
-                                    <div class="card-body">
-                                        <div className="d-flex justify-content-center align-items-center">
-                                            <div class="spinner-grow text-primary" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-secondary" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-success" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-danger" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-warning" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-info" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-light" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                            <div class="spinner-grow text-dark" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        }
-                    </div>
-                </div>
-            </div >
+                    ) : <Loading />
+                }
+                </div>  
+            </div>
         )
     }
 }

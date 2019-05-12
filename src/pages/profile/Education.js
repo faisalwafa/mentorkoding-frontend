@@ -38,19 +38,21 @@ export default class Education extends Component {
     render() {
         return (
             <div>
-                <div className="card my-4 text-center">
-                    <h5 className=" mt-4">Education</h5>
+                <div className="card my-4">
+                    <h5 className=" mt-4 text-center">Educations</h5>
                     <div className="card-body">
-                        {
-                            this.state.educations.map((education, index) => {
-                                return <EducationItem key={index} id={index} education={education} id={index} onDelete={this.onDelete} />
-                            })
-                        }
-                        <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddEducation" style={{
-                            margin: "auto"
-                        }}>
-                            Tambah
-                        </button>
+                        <div className="row">
+                            {
+                                this.state.educations.map((education, index) => {
+                                    return <EducationItem key={index} id={index} education={education} id={index} onDelete={this.onDelete} />
+                                })
+                            }
+                        </div>
+                        <div className="text-center">
+                            <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddEducation">
+                                Tambah
+                            </button>
+                        </div>
                     </div>
                     <div className="modal fade" id="AddEducation" tabIndex="-1" role="dialog" >
                         <div className="modal-dialog" role="document">

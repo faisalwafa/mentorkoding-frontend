@@ -38,19 +38,21 @@ export default class Portofolio extends Component {
     render() {
         return (
             <div>
-                <div className="card my-4 text-center">
-                    <h5 className=" mt-4">Portofolio</h5>
+                <div className="card my-4">
+                    <h4 className=" mt-4 text-center">Portofolios & Accomplishments</h4>
                     <div className="card-body">
-                        {
-                            this.state.projects.map((project, index) => {
-                                return <PortofolioItem key={index} id={index} project={project} id={index} onDelete={this.onDelete} />
-                            })
-                        }
-                        <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddPortofolio" style={{
-                            margin: "auto"
-                        }}>
-                            Tambah
-                        </button>
+                        <div className="row">
+                            {
+                                this.state.projects.map((project, index) => {
+                                    return <PortofolioItem key={index} id={index} project={project} id={index} onDelete={this.onDelete} />
+                                })
+                            }
+                        </div>
+                        <div className="text-center">
+                            <button className="btn btn-primary mt-3" data-toggle="modal" data-target="#AddPortofolio">
+                                Tambah
+                            </button>
+                        </div>
                     </div>
                     <div className="modal fade" id="AddPortofolio" tabIndex="-1" role="dialog" >
                         <div className="modal-dialog" role="document">

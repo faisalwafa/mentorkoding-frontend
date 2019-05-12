@@ -17,16 +17,16 @@ export default class InformasiProfil extends Component {
 
     render() {
         return (
-            <div className="card my-3 info">
+            <div className="card my-3 info" style={{
+                height:"85%"
+            }}>
                 <div className="card-body">
                     <div className="mb-4">
-                        <h5 className="text-center">Informasi Profil</h5>
+                        <h5 className="text-center">Profile Information</h5>
                         <button className="btn btn-light sunting" data-toggle="modal" data-target="#SuntingProfil">
-                            <i class="fas fa-edit"></i>
+                            <i className="fas fa-edit"></i>
                         </button>
                     </div>
-
-
                     <div className="modal fade" id="SuntingProfil" tabIndex="-1" role="dialog" >
                         <div className="modal-dialog" role="document">
                             <div className="modal-content">
@@ -38,6 +38,16 @@ export default class InformasiProfil extends Component {
                                 </div>
                                 <form onSubmit={this.handleChange}>
                                     <div className="modal-body">
+                                        <div className="form-group">
+                                            <input
+                                                type="text"
+                                                name="description"
+                                                value={this.state.description}
+                                                onChange={this.onChange}
+                                                className="form-control"
+                                                placeholder="Description"
+                                            />
+                                        </div>
                                         <div className="form-group">
                                             <input
                                                 type="text"
@@ -60,15 +70,6 @@ export default class InformasiProfil extends Component {
                                         <div className="form-group">
                                             <input
                                                 type="text"
-                                                name="educations"
-                                                value={this.state.educations}
-                                                onChange={this.onChange}
-                                                className="form-control"
-                                                placeholder="Pendidikan Terakhir" />
-                                        </div>
-                                        <div className="form-group">
-                                            <input
-                                                type="text"
                                                 name="job"
                                                 value={this.state.job}
                                                 onChange={this.onChange}
@@ -83,18 +84,40 @@ export default class InformasiProfil extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className=" row">
-                        <div className="col-5 ">
-                            <p className="card-text"><i className="fas fa-map-marker-alt"></i> Alamat</p>
-                            <p className="card-text"><i className="fas fa-mobile-alt"></i> Telepon</p>
-                            <p className="card-text"><i className="fas fa-building"></i> Pekerjaan</p>
+                    <div className="row">
+                        <div className="col border-right">
+                            <h6>Name: </h6>
+                            <h4>{this.props.name}</h4>
+                            <br/>
+                            <h6>Username: </h6>
+                            <h5>{this.props.username}</h5>
                         </div>
                         <div className="col">
-                            <p className="card-text">: {this.props.address}</p>
-                            <p className="card-text">: {this.props.phone}</p>
-                            <p className="card-text">: {this.props.job}</p>
+                            <h6 className="card-text pb-3" style={{
+                                fontSize:'1.1rem'
+                            }}>
+                                <i className="fas fa-map-marker-alt"></i>
+                                <span className="pl-1">Address:</span>
+                                <span className="pl-3">{this.props.address}</span>
+                            </h6>
+                            <h6 className="card-text pb-3" style={{
+                                fontSize:'1.1rem'
+                            }}>
+                                <i className="ffas fa-mobile-alt"></i>
+                                <span className="pl-1">Phone:</span>
+                                <span className="pl-4">{this.props.phone}</span>
+                            </h6>
+                            <h6 className="card-text pb-3" style={{
+                                fontSize:'1.1rem'
+                            }}>
+                                <i className="fas fa-building"></i>
+                                <span className="pl-1">Job:</span>
+                                <span className="pl-5">{this.props.job}</span>
+                            </h6>
                         </div>
                     </div>
+                    <hr/>
+                    <p className="lead pb-4">{this.props.description}</p>
                 </div>
 
             </div>

@@ -31,7 +31,7 @@ export default class Skills extends Component {
         return (
             <div>
                 <div className="card my-4 text-center">
-                    <h5 className=" mt-4">Keahlian yang Dimiliki</h5>
+                    <h4 className=" mt-4">Skills</h4>
                     <div className="card-body ">
                         <div className="row">
                             {/* <div className="col-12"> */}
