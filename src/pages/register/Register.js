@@ -121,7 +121,7 @@ export default class Login extends Component {
                             </form>
                             <p className="text-center mt-3 login-bottom">Sudah punya akun? <Link to="/Login">Login disini</Link></p>
                             {this.state.isRedirected && (
-                                <Redirect to="/Profile" />
+                                <Redirect to="/Home" />
                             )}
                         </div>
                     </div>
