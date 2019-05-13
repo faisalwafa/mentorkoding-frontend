@@ -10,66 +10,15 @@ import Loading from '../../layout/Loading'
 import { apiEndpoint } from "../../helper/helper";
 
 export default class Home extends Component {
-    state = {
-        user: null,
-        loading: false,
-        meetups: [
-            {
-                id: 1,
-                name: "Daffa",
-                topic: "Javascript",
-                place: "Politeknik Negeri Malang",
-                time: Date.now(),
-                role: "Mentor",
-                isConfirmed: false,
-                lat: -7.947334000000007,
-                lng: 112.61548500000004
-            },
-            {
-                id: 2,
-                name: "Akbar",
-                topic: "Javascript",
-                place: "Universitas Brawijaya",
-                time: Date.now(),
-                role: "Mentor",
-                isConfirmed: true,
-                lat: -7.947334000000007,
-                lng: 112.61548500000004
-            },
-            {
-                id: 3,
-                name: "Dwiputra",
-                topic: "Javascript",
-                place: "Ngopa Ngopi",
-                time: Date.now(),
-                role: "Student",
-                isConfirmed: true,
-                lat: -7.947334000000007,
-                lng: 112.61548500000004
-            },
-            {
-                id: 4,
-                name: "Damar",
-                topic: "Javascript",
-                place: "Seven Chicken",
-                time: Date.now(),
-                role: "Mentor",
-                isConfirmed: true,
-                lat: -7.947334000000007,
-                lng: 112.61548500000004
-            },
-            {
-                id: 5,
-                name: "Riyanto",
-                topic: "Javascript",
-                place: "Studio Bakso",
-                time: Date.now(),
-                role: "Student",
-                isConfirmed: false,
-                lat: -7.947334000000007,
-                lng: 112.61548500000004
-            }
-        ]
+    constructor(props) {
+        super(props)
+        this.state = {
+            user: null,
+            loading: false,
+            unconfirmedMeetup: [],
+            incomingMeetup: [],
+            meetupSchedule: []
+        }
     }
 
     componentDidMount() {
@@ -78,22 +27,117 @@ export default class Home extends Component {
                 'Authorization': `Bearer ${localStorage.getItem("authToken")}`
             }
         })
-            .then(response => {
-                this.setState({
+            .then(async response => {
+                await this.setState({
                     user: response.data,
-                    loading: true
                 })
-                console.log(this.state.user)
+                return axios.get(`${apiEndpoint}/api/v1/meetups`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    }
+                })
+            })
+            .then(response => {
+                this.organizeMeetup(response.data)
             })
     }
 
-    render() {
-        const confirmedMeetup = this.state.meetups.filter(meetup => meetup.isConfirmed)
-        const unconfirmedMeetup = this.state.meetups.filter(meetup => !meetup.isConfirmed)
-        const incomingMeetup = confirmedMeetup[0]
-        const laterMeetups = confirmedMeetup
+    onMeetupAccept = async (id) => {
+        await this.setState({
+            loading: false
+        })
+        axios.put(`${apiEndpoint}/api/v1/meetups/${id}`, {
+            isConfirmed: true
+        } ,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+            }
+        })
+        .then(() => {
+            return axios.get(`${apiEndpoint}/api/v1/meetups`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                }
+            })
+        })
+        .then(response => {
+            this.organizeMeetup(response.data)
+        })
+    }
+
+    onMeetupDecline = async (id) => {
+        await this.setState({
+            loading: false
+        })
+        axios.delete(`${apiEndpoint}/api/v1/meetups/${id}`,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+            }
+        })
+        .then(() => {
+            return axios.get(`${apiEndpoint}/api/v1/meetups`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                }
+            })
+        })
+        .then(response => {
+            this.organizeMeetup(response.data)
+        })
+    }
+
+    onMeetupFinish = async (_id) => {
+        await this.setState({
+            loading: false
+        })
+        axios.put(`${apiEndpoint}/api/v1/meetups/${_id}`, {
+            isFinished: true
+        } ,{
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+            }
+        })
+        .then(() => {
+            return axios.get(`${apiEndpoint}/api/v1/meetups`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                }
+            })
+        })
+        .then(response => {
+            this.organizeMeetup(response.data)
+        })
+    }
+
+    organizeMeetup = async (data) => {
+        let meetups = data
+        meetups.forEach(meetup => {
+            if (meetup.mentor._id === this.state.user._id) {
+                meetup.role = "Mentor"
+            } else {
+                meetup.role = "Student"
+            }
+        })
+        let confirmedMeetup = meetups.filter(meetup => meetup.isConfirmed)
+        let unconfirmedMeetup = meetups.filter(meetup => !meetup.isConfirmed)
+        let incomingMeetup = confirmedMeetup[0]
+        let laterMeetups = confirmedMeetup
         laterMeetups.splice(0,1)
-        const meetupSchedule = laterMeetups
+        let meetupSchedule = laterMeetups
+        await this.setState({
+            unconfirmedMeetup,
+            incomingMeetup,
+            meetupSchedule,
+            loading: true
+        })
+    }
+
+    checkUnconfirmedRole = () => {
+        let meetups = this.state.unconfirmedMeetup.filter(meetup => meetup.role === "Mentor")
+        return meetups.length !== 0
+    }
+
+    render() {
         return (
             <div>
                 <Header />
@@ -116,7 +160,16 @@ export default class Home extends Component {
                                             />
                                         </div>
                                         <div className="col">
-                                            <IncomingMeetup meetup={incomingMeetup}/>
+                                            {
+                                                this.state.incomingMeetup ? <IncomingMeetup meetup={this.state.incomingMeetup} onMeetupFinish={this.onMeetupFinish}/> :
+                                                <div className="card h-100">
+                                                    <div className="card-body">
+                                                        <div className="d-flex justify-content-center align-items-center h-100">
+                                                            <h3>No Incoming Meetup Found</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -157,14 +210,25 @@ export default class Home extends Component {
                                                 id="pills-confirmed" 
                                                 role="tabpanel" 
                                                 aria-labelledby="pills-confirmed-tab">
-                                                <Jadwal meetups={meetupSchedule} />
+                                                {
+                                                    this.state.meetupSchedule.length !== 0 ? <Jadwal meetups={this.state.meetupSchedule} onMeetupFinish={this.onMeetupFinish}/> : 
+                                                        <div className="d-flex justify-content-center align-items-center h-100 my-5">
+                                                            <h3 className="py-5">No Other Meetup Schedule</h3>
+                                                        </div>
+                                                }
                                             </div>
                                             <div 
                                                 className="tab-pane fade" 
                                                 id="pills-unconfirmed" 
                                                 role="tabpanel" 
                                                 aria-labelledby="pills-unconfirmed-tab">
-                                                <Unconfirmed meetups={unconfirmedMeetup} />
+                                                {
+                                                    this.checkUnconfirmedRole() ?
+                                                    <Unconfirmed id={this.state.user._id} meetups={this.state.unconfirmedMeetup} onMeetupAccept={this.onMeetupAccept} onMeetupDecline={this.onMeetupDecline} /> :
+                                                    <div className="d-flex justify-content-center align-items-center h-100 my-5">
+                                                        <h3 className="py-5">No Unconfirmed Meetups</h3>
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>

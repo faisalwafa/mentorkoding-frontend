@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default class Hasil extends Component {
   render() {
     return (
-      <div className='mt-5'>
+      <div className='my-5'>
         <div className='card' style={{
             // height :'180px',
             width  :'50%',

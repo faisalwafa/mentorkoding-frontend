@@ -37,7 +37,7 @@ export default class Skills extends Component {
                             {/* <div className="col-12"> */}
                             {
                                 this.state.skills.map((skill, index) => {
-                                    return <SkillItem key={index} id={index} skill={skill} id={index} onDelete={this.onDelete} />
+                                    return <SkillItem key={index} user={this.props.user} id={index} skill={skill} id={index} onDelete={this.onDelete} />
                                 })
                             }
                             {/* </div> */}

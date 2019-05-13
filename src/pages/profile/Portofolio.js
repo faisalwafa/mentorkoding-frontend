@@ -44,7 +44,7 @@ export default class Portofolio extends Component {
                         <div className="row">
                             {
                                 this.state.projects.map((project, index) => {
-                                    return <PortofolioItem key={index} id={index} project={project} id={index} onDelete={this.onDelete} />
+                                    return <PortofolioItem key={index} id={index} user={this.props.user} project={project} id={index} onDelete={this.onDelete} />
                                 })
                             }
                         </div>

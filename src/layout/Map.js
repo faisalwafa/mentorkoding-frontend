@@ -10,6 +10,11 @@ const Wrapper = styled.div`
 `;
 
 export default class Map extends Component {
+    constructor(props) {
+        super(props)
+
+        this.map = null
+    }
     componentDidMount(){
         this.map = L.map('map',{
             center : [this.props.lat, this.props.lng],

@@ -8,7 +8,7 @@ export default class Meetup extends Component {
       <div>
         <Header />
         <div className='container'>
-          <Form />
+          <Form user={this.props.location.state.user} profile={this.props.location.state.profile} />
         </div>
       </div>
     )

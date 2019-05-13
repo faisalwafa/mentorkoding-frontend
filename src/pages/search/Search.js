@@ -4,27 +4,57 @@ import Header from '../../layout/Header';
 import Hasil from './Hasil';
 import "./Search.css";
 import axios from 'axios'
+import { apiEndpoint } from "../../helper/helper";
+import Loading from '../../layout/Loading';
 
 export default class Search extends Component {
     state = {
+        user: null,
+        loading: true,
         skills:[],
         profiles:[]
     }
-    onSubmit = () => {
-        console.log(this.state.skills);
-        axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/search", {
-            skill: [...this.state.skills]
+    onSubmit = async () => {
+        await this.setState({
+            loading: false
         })
-        .then(response =>{
-            console.log(response)
-            const {data} = response
-            this.setState({
-                profiles : data
+        if (localStorage.getItem('authToken')) {
+            axios.get(`${apiEndpoint}/api/v1/users/profile`, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                }
             })
-        })
+            .then(async response => {
+                await this.setState({
+                    user: response.data,
+                })
+                return axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/search", {
+                    skill: [...this.state.skills]
+                })
+            })
+            .then(async response =>{
+                const {data} = response
+                this.setState({
+                    profiles : data,
+                    loading: true
+                })
+            })
+        } else {
+            axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/search", {
+                    skill: [...this.state.skills]
+            })
+            .then(async response =>{
+                const {data} = response
+                this.setState({
+                    profiles : data,
+                    loading: true
+                })
+            })
+        }
     }
     render() {
-        const { profiles } = this.state
+        let { profiles, user } = this.state
+        const results = profiles.filter(profile => profile._id !== user._id)
         return (
         <div>
             <Header />
@@ -55,16 +85,22 @@ export default class Search extends Component {
                     </div>
                 </div>
                 {
-                    profiles.map((profile, index) => {
-                        return <Hasil 
-                            key= {profile._id}
-                            id={profile._id}
-                            nama={profile.name}
-                            skills={profile.skills}
-                            job={profile.job}
-                            address={profile.address}
-                        />
-                    })
+                    this.state.loading ? (
+                        results.map((profile, index) => {
+                            return <Hasil 
+                                key= {profile._id}
+                                id={profile._id}
+                                nama={profile.name}
+                                skills={profile.skills}
+                                job={profile.job}
+                                address={profile.address}
+                            />
+                        })
+                    ) : <div className="row justify-content-center">
+                        <div className="col-6">
+                            <Loading />
+                        </div>
+                    </div>
                 }
             </div>
         </div>

@@ -16,7 +16,7 @@ export default class Jadwal extends Component {
                         <div className="row">
                             {
                                 this.props.meetups.map(meetup => {
-                                    return <MeetupItem key={meetup.id} meetup = {meetup} />
+                                    return <MeetupItem key={meetup._id} onMeetupFinish={this.props.onMeetupFinish} meetup = {meetup} />
                                 })
                             }
                         </div>

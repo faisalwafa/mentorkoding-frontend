@@ -44,7 +44,7 @@ export default class Education extends Component {
                         <div className="row">
                             {
                                 this.state.educations.map((education, index) => {
-                                    return <EducationItem key={index} id={index} education={education} id={index} onDelete={this.onDelete} />
+                                    return <EducationItem key={index} id={index} user={this.props.user} education={education} id={index} onDelete={this.onDelete} />
                                 })
                             }
                         </div>

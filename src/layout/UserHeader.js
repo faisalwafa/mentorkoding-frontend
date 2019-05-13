@@ -23,7 +23,6 @@ export default class HeaderAfter extends Component {
                     user: response.data,
                     loading: true
                 })
-                console.log(this.state.user)
             })
     }
 

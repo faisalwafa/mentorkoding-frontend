@@ -10,6 +10,7 @@ import Loading from "../../layout/Loading";
 import cover from "../../assets/cover.jpg";
 import { apiEndpoint } from "../../helper/helper";
 import Education from './Education';
+import { Link } from "react-router-dom";
 
 export default class Profile extends Component {
     state = {
@@ -33,6 +34,32 @@ export default class Profile extends Component {
 
     checkUser = () => {
         return this.state._id === this.state.user._id
+    }
+
+    async componentWillReceiveProps(newProps) {
+        await this.setState({
+            loading: false
+        })
+        axios.get(`${apiEndpoint}/api/v1/users/${newProps.match.params.id}`)
+            .then(async response => {
+                await this.setState({
+                    name: response.data.name,
+                    description: response.data.description,
+                    address: response.data.address,
+                    phone: response.data.phone,
+                    educations: response.data.educations,
+                    job: response.data.job,
+                    isMentor: response.data.isMentor,
+                    skills: response.data.skills,
+                    _id: response.data._id,
+                    username: response.data.username,
+                    projects: response.data.projects,
+                    reviews: response.data.reviews,
+                    email: response.data.email,
+                    profilePic: response.data.profilePic,
+                    loading: true
+            })
+        })
     }
 
     componentDidMount() {
@@ -66,6 +93,24 @@ export default class Profile extends Component {
                     loading: true
                 })
             })
+    }
+
+    updateIsMentor = () => {
+        axios
+            .put(`${apiEndpoint}/api/v1/users/profile`, {
+                isMentor: !this.state.isMentor
+            }, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    }
+                })
+            .then(response => {
+                const { data } = response
+                this.setState({
+                    isMentor: data.isMentor
+                })
+            })
+            .catch(err => console.log(err))
     }
 
     updateInformation = (contact) => {
@@ -239,6 +284,40 @@ export default class Profile extends Component {
                                             username={this.state.username}
                                             updateInformation={this.updateInformation}
                                         /> 
+                                    </div>
+                                        <div className="col-md-3">
+                                            <div className="card my-3">
+                                                <div className="card-body text-center">
+                                                {
+                                                    this.checkUser() ? [
+                                                        <div className="custom-control custom-switch">
+                                                                <input 
+                                                                type="checkbox" className="custom-control-input" id="customSwitch1" 
+                                                                defaultChecked={this.state.isMentor}
+                                                                onChange={this.updateIsMentor}
+                                                                />
+                                                                <label className="custom-control-label" for="customSwitch1">Show me as a mentor</label>
+                                                        </div>
+                                                    ]
+                                                        :
+                                                        <Link 
+                                                            to={{
+                                                                pathname: `/Meetup`,
+                                                                state: {
+                                                                    profile: {
+                                                                        id: this.state._id,
+                                                                        name: this.state.name
+                                                                    },
+                                                                    user: {
+                                                                        id: this.state.user._id
+                                                                    }
+                                                                }
+                                                            }}
+                                                            className="btn btn-gradient btn-lg btn-humongous"
+                                                        >Create Meetup</Link>
+                                                }
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
