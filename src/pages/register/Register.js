@@ -26,9 +26,14 @@ export default class Login extends Component {
             description: this.state.description
         })
             .then(response => {
+                return axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/login", {
+                    username: this.state.username,
+                    password: this.state.password
+                })
+            })
+            .then(response => {
                 localStorage.setItem("authToken", response.data.token)
                 this.setState({ username: "", password: "", isRedirected: true })
-
             })
             .catch(err => this.setState({ username: "", password: "" }))
     }

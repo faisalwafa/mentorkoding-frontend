@@ -4,11 +4,13 @@ export default class UnconfirmedItem extends Component {
   render() {
       const id = this.props.meetup._id
       const { mentor, student, role } = this.props.meetup
-        let name
+      let name,photo
         if (role === "Mentor") {
             name = student.name
+            photo = student.profilePic
         } else {
             name = mentor.name
+            photo = mentor.profilePic
         }
     return (
         <div className="col-6 my-3">
@@ -16,7 +18,7 @@ export default class UnconfirmedItem extends Component {
                 <div className="card-body">
                     <div className="row">
                         <div className="col-3 text-center">
-                            <img src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" className="rounded-circle" width="80" height="80" alt="" />
+                            <img src={`http://localhost:8000/${photo}`} className="rounded-circle" width="80" height="80" alt="" />
                             <h5 className="lead mt-4">{name}</h5>
                         </div>
                         <div className="col mt-4">
