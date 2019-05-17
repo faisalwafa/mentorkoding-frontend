@@ -1,16 +1,36 @@
 import React, { Component } from 'react'
+import axios from "axios";
 
 export default class Deskripsi extends Component {
     state = {
         ...this.props,
-        isRedirected: false
+        isRedirected: false,
+        selectedFile: null
     }
 
-    onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+    // onChange = (e) => this.setState({ [e.target.name]: e.target.value });
+
+    onChange=(e)=>{
+
+       this.setState({
+        selectedFile: e.target.files[0],
+        loaded: 0,
+       })
+    
+    }
 
     handleChange = (e) => {
         e.preventDefault()
-        this.props.updateInformation(this.state)
+        const data = new FormData()
+        data.append('file', this.state.selectedFile)
+        axios.post("http://localhost:8000/upload", data, { 
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+            }
+        })
+        .then(res => { // then print response status
+        console.log(res.statusText)
+        })
     }
     render() {
         return (
@@ -46,7 +66,7 @@ export default class Deskripsi extends Component {
                     height:"85%"
                 }}>
                     <div className="card-body d-flex justify-content-center align-items-center">
-                        <img src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" className="rounded-circle" width="120" height="120" />
+                        <img src={`http://localhost:8000/${this.props.profilePic}`} className="rounded-circle" width="120" height="120" />
                         {
                             this.props.user ? <button className="btn btn-light sunting" data-toggle="modal" data-target="#SuntingDeskripsi">
                             <i className="fas fa-edit"></i>

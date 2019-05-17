@@ -157,6 +157,7 @@ export default class Home extends Component {
                                                 id={this.state.user._id}
                                                 name={this.state.user.name}
                                                 username={this.state.user.username}
+                                                profilePic={this.state.user.profilePic}
                                             />
                                         </div>
                                         <div className="col">
