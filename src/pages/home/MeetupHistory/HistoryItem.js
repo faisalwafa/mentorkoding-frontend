@@ -23,7 +23,8 @@ export default class HistoryItem extends Component {
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-    handleChange() {
+    handleChange = (e) => {
+        e.preventDefault()
         axios
             .get(`${apiEndpoint}/api/v1/users/${this.props.meetup.mentor._id}`, {
                 headers: {
@@ -34,7 +35,7 @@ export default class HistoryItem extends Component {
                 const { data } = response
                 let reviews = data.reviews
                 let newReview = {
-                    user: this.props._id,
+                    user: this.props.id,
                     review: this.state.review
                 }
                 reviews.push(newReview)
@@ -50,6 +51,7 @@ export default class HistoryItem extends Component {
                 console.log("berhasil")
             })
     }
+
     render() {
         const { mentor, student, role, _id } = this.props.meetup
         let name, photo

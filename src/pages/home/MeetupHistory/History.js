@@ -16,7 +16,7 @@ export default class History extends Component {
                         <div className="row">
                             {
                                 this.props.meetups.map(meetup => {
-                                    return <HistoryItem key={meetup._id} meetup={meetup} id={this.props._id} />
+                                    return <HistoryItem key={meetup._id} meetup={meetup} id={this.props.id} />
                                 })
                             }
                         </div>

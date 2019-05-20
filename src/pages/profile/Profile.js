@@ -59,8 +59,8 @@ export default class Profile extends Component {
                     email: response.data.email,
                     profilePic: response.data.profilePic,
                     loading: true
+                })
             })
-        })
     }
 
     componentDidMount() {
@@ -258,90 +258,90 @@ export default class Profile extends Component {
             <div>
                 <Header />
                 <div className="container">
-                {
-                    this.state.loading ? (
-                    <div className="container my-5">
-                        <div className="card" style={{
-                            background:`#fff url(${cover}) no-repeat 98% 118%`,
-                            minHeight: "100%",
-                            width:"100%",
-                            overflow:"hidden"
-                        }}>
-                            <div className="card-body">
-                                <div className="row justify-content-center">
-                                    <div className="col-md-3">
-                                        <Deskripsi
-                                            user={this.checkUser()} profilePic={this.state.profilePic}
-                                        />
-                                    </div>
-                                    <div className="col-md-6">
-                                        <InformasiProfil
-                                            user={this.checkUser()}
-                                            address={this.state.address}
-                                            phone={this.state.phone}
-                                            job={this.state.job}
-                                            description={this.state.description}
-                                            name={this.state.name}
-                                            username={this.state.username}
-                                            updateInformation={this.updateInformation}
-                                        /> 
-                                    </div>
-                                        <div className="col-md-3">
-                                            <div className="card my-3">
-                                                <div className="card-body text-center">
-                                                {
-                                                    this.checkUser() ? [
-                                                        <div className="custom-control custom-switch">
-                                                                <input 
-                                                                type="checkbox" className="custom-control-input" id="customSwitch1" 
-                                                                defaultChecked={this.state.isMentor}
-                                                                onChange={this.updateIsMentor}
-                                                                />
-                                                                <label className="custom-control-label" htmlFor="customSwitch1">Show me as a mentor</label>
-                                                        </div>
-                                                    ]
-                                                        :
-                                                        <Link 
-                                                            to={{
-                                                                pathname: `/Meetup`,
-                                                                state: {
-                                                                    profile: {
-                                                                        id: this.state._id,
-                                                                        name: this.state.name
-                                                                    },
-                                                                    user: {
-                                                                        id: this.state.user._id
-                                                                    }
-                                                                }
-                                                            }}
-                                                            className="btn btn-gradient btn-lg btn-humongous"
-                                                        >Create Meetup</Link>
-                                                }
+                    {
+                        this.state.loading ? (
+                            <div className="container my-5">
+                                <div className="card" style={{
+                                    background: `#fff url(${cover}) no-repeat 98% 118%`,
+                                    minHeight: "100%",
+                                    width: "100%",
+                                    overflow: "hidden"
+                                }}>
+                                    <div className="card-body">
+                                        <div className="row justify-content-center">
+                                            <div className="col-md-3">
+                                                <Deskripsi
+                                                    user={this.checkUser()} profilePic={this.state.profilePic}
+                                                />
+                                            </div>
+                                            <div className="col-md-6">
+                                                <InformasiProfil
+                                                    user={this.checkUser()}
+                                                    address={this.state.address}
+                                                    phone={this.state.phone}
+                                                    job={this.state.job}
+                                                    description={this.state.description}
+                                                    name={this.state.name}
+                                                    username={this.state.username}
+                                                    updateInformation={this.updateInformation}
+                                                />
+                                            </div>
+                                            <div className="col-md-3">
+                                                <div className="card my-3">
+                                                    <div className="card-body text-center">
+                                                        {
+                                                            this.checkUser() ? [
+                                                                <div className="custom-control custom-switch">
+                                                                    <input
+                                                                        type="checkbox" className="custom-control-input" id="customSwitch1"
+                                                                        defaultChecked={this.state.isMentor}
+                                                                        onChange={this.updateIsMentor}
+                                                                    />
+                                                                    <label className="custom-control-label" htmlFor="customSwitch1">Show me as a mentor</label>
+                                                                </div>
+                                                            ]
+                                                                :
+                                                                <Link
+                                                                    to={{
+                                                                        pathname: `/Meetup`,
+                                                                        state: {
+                                                                            profile: {
+                                                                                id: this.state._id,
+                                                                                name: this.state.name
+                                                                            },
+                                                                            user: {
+                                                                                id: this.state.user._id
+                                                                            }
+                                                                        }
+                                                                    }}
+                                                                    className="btn btn-gradient btn-lg btn-humongous"
+                                                                >Create Meetup</Link>
+                                                        }
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div>
+                                    <Skills user={this.checkUser()} skills={this.state.skills} updateSkill={this.updateSkill} deleteSkill={this.deleteSkill} />
+
+                                </div>
+                                <div>
+                                    <Portofolio user={this.checkUser()} projects={this.state.projects} updateProject={this.updateProject} deleteProject={this.deleteProject} />
+                                </div>
+                                <div>
+                                    <Education user={this.checkUser()} educations={this.state.educations} updateEducation={this.updateEducation} deleteEducation={this.deleteEducation} />
+                                </div>
+                                <div>
+                                    <Review reviews=
+                                        {this.state.reviews}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                             <Skills user={this.checkUser()} skills={this.state.skills} updateSkill={this.updateSkill} deleteSkill={this.deleteSkill} />
-                                    
-                        </div>
-                        <div>
-                            <Portofolio user={this.checkUser()} projects={this.state.projects} updateProject={this.updateProject} deleteProject={this.deleteProject} />  
-                        </div>
-                        <div>
-                            <Education user={this.checkUser()} educations={this.state.educations} updateEducation={this.updateEducation} deleteEducation={this.deleteEducation} />     
-                        </div>
-                        <div>
-                            <Review reviews=
-                            {this.state.reviews} 
-                            />
-                        </div>
-                    </div>
-                    ) : <Loading />
-                }
-                </div>  
+                        ) : <Loading />
+                    }
+                </div>
             </div>
         )
     }
