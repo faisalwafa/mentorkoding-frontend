@@ -9,7 +9,7 @@ export default class Headline extends Component {
                     <div className="card-body">
                         <div className="d-flex align-items-center justify-content-center">
                             <div className="text-center">
-                                <img src={`http://localhost:8000/${this.props.profilePic}`} className="rounded-circle" height="80" alt="" />
+                                <img src={`http://localhost:8000/${this.props.profilePic}`} className="rounded-circle" height="80" width="80" alt="" />
                                 <h4 className="mt-4">{this.props.name}</h4>
                                 <h6 className="text-secondary">{this.props.username}</h6>
                             </div>

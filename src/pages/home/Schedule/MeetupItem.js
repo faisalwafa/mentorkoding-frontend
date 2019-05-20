@@ -1,6 +1,19 @@
 import React, { Component } from 'react'
 
 export default class MeetupItems extends Component {
+    dateFormat = (date) => {
+        let d = new Date(date)
+        let day = d.getDate()
+        let month = d.getMonth() + 1
+        if (day < 10) {
+            day = `0${day}`
+        }
+        if (month < 10) {
+            month = `0${month}`
+        }
+        return `${d.getFullYear()}-${month}-${day}`
+    }
+
   render() {
     const { mentor, student, role, _id } = this.props.meetup
     let name,photo
@@ -11,6 +24,8 @@ export default class MeetupItems extends Component {
         name = mentor.name
         photo = mentor.profilePic
     }
+
+    const date = this.dateFormat(this.props.meetup.date)
     return (
         <div className="col-6 my-3">
             <div className="card">
@@ -45,7 +60,7 @@ export default class MeetupItems extends Component {
                             <h5 className="card-text pb-3">
                                 <i className="far fa-clock"></i> 
                                 <span className="pl-2">Time:</span>
-                                <span className="pl-4">{this.props.meetup.time}</span>
+                                <span className="pl-4">{date}, {this.props.meetup.time}</span>
                             </h5>
                             <h5 className="card-text pb-3">
                                 <i className="fas fa-graduation-cap"></i> 
