@@ -11,6 +11,7 @@ import cover from "../../assets/cover.jpg";
 import { apiEndpoint } from "../../helper/helper";
 import Education from './Education';
 import { Link } from "react-router-dom";
+import Review from './Review';
 
 export default class Profile extends Component {
     state = {
@@ -296,7 +297,7 @@ export default class Profile extends Component {
                                                                 defaultChecked={this.state.isMentor}
                                                                 onChange={this.updateIsMentor}
                                                                 />
-                                                                <label className="custom-control-label" for="customSwitch1">Show me as a mentor</label>
+                                                                <label className="custom-control-label" htmlFor="customSwitch1">Show me as a mentor</label>
                                                         </div>
                                                     ]
                                                         :
@@ -331,6 +332,11 @@ export default class Profile extends Component {
                         </div>
                         <div>
                             <Education user={this.checkUser()} educations={this.state.educations} updateEducation={this.updateEducation} deleteEducation={this.deleteEducation} />     
+                        </div>
+                        <div>
+                            <Review reviews=
+                            {this.state.reviews} 
+                            />
                         </div>
                     </div>
                     ) : <Loading />
