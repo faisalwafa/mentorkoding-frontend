@@ -1,1 +1,1 @@
-export const apiEndpoint = "https://mentor-koding-backend.herokuapp.com"
+export const apiEndpoint = "http://localhost:8080"
