@@ -28,7 +28,7 @@ export default class Search extends Component {
                 await this.setState({
                     user: response.data,
                 })
-                return axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/search", {
+                return axios.post(`${apiEndpoint}/api/v1/users/search`, {
                     skill: [...this.state.skills]
                 })
             })
@@ -40,7 +40,7 @@ export default class Search extends Component {
                 })
             })
         } else {
-            axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/search", {
+            axios.post(`${apiEndpoint}/api/v1/users/search`, {
                     skill: [...this.state.skills]
             })
             .then(async response =>{
@@ -87,7 +87,7 @@ export default class Search extends Component {
                 {
                     this.state.loading ? (
                         results.map((profile, index) => {
-                            return <Hasil 
+                            return <Hasil
                                 key= {profile._id}
                                 id={profile._id}
                                 nama={profile.name}

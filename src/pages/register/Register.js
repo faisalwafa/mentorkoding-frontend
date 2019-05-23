@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
+import { apiEndpoint } from "../../helper/helper";
 
 export default class Login extends Component {
     state = {
@@ -17,7 +18,7 @@ export default class Login extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/", {
+        axios.post(`${apiEndpoint}/api/v1/users/`, {
             username: this.state.username,
             password: this.state.password,
             name: this.state.name,
@@ -28,7 +29,7 @@ export default class Login extends Component {
             job: this.state.job
         })
             .then(response => {
-                return axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/login", {
+                return axios.post(`${apiEndpoint}/api/v1/users/login`, {
                     username: this.state.username,
                     password: this.state.password
                 })

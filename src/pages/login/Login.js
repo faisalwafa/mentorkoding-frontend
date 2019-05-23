@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import HeaderHome from "../../layout/HeaderHome";
 import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
+import { apiEndpoint } from "../../helper/helper";
 import './Login.css'
 
 export default class Login extends Component {
@@ -13,7 +14,7 @@ export default class Login extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        axios.post("https://mentor-koding-backend.herokuapp.com/api/v1/users/login", {
+        axios.post(`${apiEndpoint}/api/v1/users/login`, {
             username: this.state.username,
             password: this.state.password
         })
