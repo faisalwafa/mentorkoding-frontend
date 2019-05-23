@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { apiEndpoint } from "../../../helper/helper";
+import { Link } from "react-router-dom";
 
 export default class HistoryItem extends Component {
     state = {
@@ -69,7 +70,16 @@ export default class HistoryItem extends Component {
                         <div className="row">
                             <div className="col-4 text-center">
                                 <img src={`http://localhost:8000/${photo}`} className="rounded-circle" width="80" height="80" alt="" />
-                                <h5 className="lead mt-4">{name}</h5>
+                                {
+                                    role === "Mentor" && (
+                                        <Link to={`/Profile/${this.props.meetup.student._id}`}><h5 className="lead mt-4">{name}</h5></Link>
+                                    )
+                                }
+                                {
+                                    role === "Student" && (
+                                        <Link to={`/Profile/${this.props.meetup.mentor._id}`}><h5 className="lead mt-4">{name}</h5></Link>
+                                    )
+                                }
                                 {
                                     role === "Student" && (
                                         <div>
